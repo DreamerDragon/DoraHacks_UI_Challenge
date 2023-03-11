@@ -1,0 +1,205 @@
+@import './utils';
+@import './variables';
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Source Sans Pro', sans-serif;
+}
+
+:root {
+    --xPos: 50%;
+    --yPos: 50%;
+}
+
+html {
+    height: 100vh;
+}
+
+body {
+    height: 100vh;
+    width: 100vw;
+    background: $filter-color;
+    overflow: scroll;
+    // prevent overscrolling
+    overscroll-behavior-y: none;
+}
+
+.home {
+    height: fit-content;
+    min-height: 100vh;
+    width: 100vw;
+    background-size: cover;
+    background: $bg-color;
+    position: relative;
+    z-index: 0;
+    @include flexCenter(column);
+    .bg_filter,
+    .bg_filter2,
+    .bg_filter3 {
+        width: inherit;
+        height: 100%;
+        position: absolute;
+    }
+    .bg_filter {
+        z-index: 1;
+        background-size: 75px 75px;
+        background-image: linear-gradient(to right, $grid-edge, 1px, transparent 1px), linear-gradient(to bottom, $grid-edge, 1px, transparent 1px);
+    }
+    .bg_filter2 {
+        z-index: 2;
+        background-size: cover;
+        background: radial-gradient(rgba($filter-color, 0.8) 0%, rgba($filter-color, 1) 60%);
+    }
+    .bg_filter3 {
+        z-index: 3;
+        background-size: cover;
+        background: radial-gradient(circle 120vw at 60% -40vh, rgba($filter-color2, 1), rgba($filter-color, 0) 60%);
+    }
+    .text_area {
+        @include media(mobile) {}
+        @include media(tablet, desktop) {}
+        padding-top: max(100px, 10vh);
+        max-width: 540px;
+        min-width: 300px;
+        width: 80%;
+        text-align: left;
+        position: relative;
+        color: $font-color;
+        z-index: 3;
+        display: flex;
+        flex-direction: column;
+        span {
+            margin-bottom: 20px;
+        }
+        span:first-child {
+            font-size: 2.2rem;
+            font-weight: 700;
+        }
+        span:nth-child(2) {
+            font-size: 1.6rem;
+            font-weight: 400;
+        }
+        span:nth-child(3),
+        span:nth-child(4) {
+            font-size: 1.1rem;
+            font-weight: 400;
+            color: $font-color2;
+        }
+    }
+    .card_wrapper {
+        position: relative;
+        z-index: 3;
+        margin: 50px 0 150px 0;
+        display: grid;
+        @include media(mobile) {
+            width: 80%;
+            max-width: 500px;
+            min-width: 300px;
+            grid-template-columns: 1fr;
+        }
+        @include media(tablet) {
+            width: 750px;
+            max-width: none;
+            min-width: none;
+            grid-template-columns: repeat(2, 1fr);
+            column-gap: 1.5rem;
+        }
+        @include media(desktop) {
+            width: 1100px;
+            max-width: none;
+            min-width: none;
+            grid-template-columns: repeat(3, 1fr);
+            column-gap: 1.5rem;
+        }
+        row-gap: 1.5rem;
+        .card {
+            width: 100%;
+            height: 400px;
+            background: rgba($card-bg-color, 0.5);
+            border-radius: 20px;
+            border: 1px solid rgba($card-edge, 0.8);
+            padding: 50px 40px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            color: $font-color;
+            position: relative;
+            z-index: 3;
+            &_btn {
+                @include btn(rgba($button-bg-color, 0.5), $button-color, $button-edge);
+                width: 140px;
+                height: 40px;
+                margin: 10px 0;
+                cursor: pointer;
+                &:focus {
+                    outline: none;
+                }
+                &:hover {
+                    transition-duration: 0.3s;
+                    -moz-box-shadow: 0 0 5px $button-edge-glow;
+                    -webkit-box-shadow: 0 0 15px $button-edge-glow;
+                    border-color: $button-edge-glow;
+                    box-shadow: 0 0 10px $button-edge-glow;
+                }
+            }
+            &_img {
+                width: 120px;
+                height: 120px;
+                position: relative;
+                img {
+                    object-fit: cover;
+                    width: inherit;
+                    height: inherit;
+                }
+            }
+            &_name {
+                font-size: 1.8rem;
+                font-weight: 600;
+            }
+            &_num {
+                font-size: 1.8rem;
+                strong {
+                    font-size: 2.2rem;
+                    font-weight: 600;
+                }
+            }
+            &_text {
+                color: $font-color2;
+                font-size: 1.1rem;
+            }
+            &_stats {
+                margin-top: 25px;
+                width: 100%;
+                display: flex;
+                justify-content: space-between;
+                div {
+                    display: flex;
+                    flex-direction: column;
+                    text-align: center;
+                }
+            }
+        }
+        .spotlight {
+            background: radial-gradient( circle 12rem at var(--xPos) var(--yPos), $spotlight, rgba($card-bg-color, 0.3));
+        }
+        .active {
+            background: linear-gradient(45deg, #953d3d, #4c2e6c, #66305a, #34407c, #4c2e6c, #66305a, #5b2d2d);
+            animation: glowing 5s linear infinite;
+            background-size: 400% 400%;
+        }
+        .clicked {
+            background: transparent;
+            border: white solid 1px;
+            color: white
+        }
+        @keyframes glowing {
+            0% {
+                background-position: 100% 0%
+            }
+            100% {
+                background-position: 0% 100%
+            }
+        }
+    }
+}

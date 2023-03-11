@@ -1,0 +1,53 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>{% block title %}Dorayaki{% endblock %}</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+    <link href="{% static 'Dorayaki/styles/styles.css' %}" rel="stylesheet">
+    <meta name="viewport" content="width=device-width">
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
+    <link rel="shortcut icon" href="#">
+</head>
+
+<body>
+    <main>
+        <section class="home">
+            <div class='bg_filter'></div>
+            <div class='bg_filter2'></div>
+            <div class='bg_filter3'></div>
+            <div class='text_area'>
+                <span>Hello, UI Engineer!</span>
+                <span>There is a prototype below. Please try to build a web page to implement this prototype with responsive layout and interactive effects</span>
+                <span>There is no presupposed responsive/adaptive design strategy for this prototype. The interactive animations/effects of this prototype is technology agnostic. Hence, any reasonble solutions are welcome</span>
+                <span>Any royalty-free/open-source resources &#40; icons, fonts, patterns, etc. &#41; can be used as alternates in your job! Have fun!</span>
+            </div>
+            <div class='card_wrapper card_inactive'>
+                {% for i in cardItems %}
+                <div id='card-{{i.name}}' class="card">
+                    <audio autoplay id="audio-{{i.name}}" src="{% static i.audio %}"></audio>
+                    <div class='card_img'><img src="{% static i.img %}"></img></div>
+                    <span class="card_name"> Dora{{ i.name }} </span>
+                    <button class="card_btn" id='{{i.name}}' onClick="interact(this)">Interact</button>
+                    <div class="card_stats">
+                        <div>
+                            <span class="card_num"> <strong>{{ i.nums.0 }}</strong> % </span>
+                            <span class="card_text"> {{ i.descriptions.0 }} </span>
+                        </div>
+                        <div>
+                            <span class="card_num"> <strong>{{ i.nums.1 }}</strong> % </span>
+                            <span class="card_text"> {{ i.descriptions.1 }} </span>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </section>
+    </main>
+    <script src="{% static 'Dorayaki/scripts/index.js' %}">
+    </script>
+</body>
+
+</html>
